@@ -1,0 +1,201 @@
+mysql> use thunder;
+Database changed
+mysql> create table faculty(Facid int(20),Facname varchar(20),Facdept varchar(10),salary int(20));
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> create table student(rollno int(10),name varchar(20),gender char(1),dob varchar(10),mobileno int(10),city varchar(20),district varchar(20),dept varchar(20));
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> create table studepartment(depid int(10),rollno int(10),depname varchar(20));
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> create table employee(empid int(10),mobileno int (10),empname varchar(20),salary int(10));
+Query OK, 0 rows affected, 3 warnings (0.01 sec)
+
+mysql> create table empdept(empid int(10),empdeptid int(10),empdeptname varchar(20));
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> 
+mysql> show tables;
++-------------------+
+| Tables_in_thunder |
++-------------------+
+| empdept           |
+| employee          |
+| faculty           |
+| student           |
+| studepartment     |
++-------------------+
+5 rows in set (0.01 sec)
+
+mysql> desc faculty;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Facid   | int         | YES  |     | NULL    |       |
+| Facname | varchar(20) | YES  |     | NULL    |       |
+| Facdept | varchar(10) | YES  |     | NULL    |       |
+| salary  | int         | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| rollno   | int         | YES  |     | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| gender   | char(1)     | YES  |     | NULL    |       |
+| dob      | varchar(10) | YES  |     | NULL    |       |
+| mobileno | int         | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| district | varchar(20) | YES  |     | NULL    |       |
+| dept     | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> desc studepartment;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| depid   | int         | YES  |     | NULL    |       |
+| rollno  | int         | YES  |     | NULL    |       |
+| depname | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| empid    | int         | YES  |     | NULL    |       |
+| mobileno | int         | YES  |     | NULL    |       |
+| empname  | varchar(20) | YES  |     | NULL    |       |
+| salary   | int         | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> desc empdept;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| empid       | int         | YES  |     | NULL    |       |
+| empdeptid   | int         | YES  |     | NULL    |       |
+| empdeptname | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into faculty values(1234,"Imran","CSE",3000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into faculty values(2345,"Ameer","MEC",4000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into faculty values(3456,"Fareed","CHE",5000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into faculty values(4567,"Sadhik","POLY",6000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from faculty;
++-------+---------+---------+--------+
+| Facid | Facname | Facdept | salary |
++-------+---------+---------+--------+
+|  1234 | Imran   | CSE     |   3000 |
+|  2345 | Ameer   | MEC     |   4000 |
+|  3456 | Fareed  | CHE     |   5000 |
+|  4567 | Sadhik  | POLY    |   6000 |
++-------+---------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> insert into student values(1,"Imran","M","January",79937,"Chennai","Tandalam","CSE");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(2,"Ameer","M","May",84679,"Benguluru","Rk puram","MEC");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(3,"Fareed","M","December",76579,"Vijayawada","Krishna","CHE");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(4,"Parveen","F","October",78962,"Guntur","Guntur","CSE");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from student;
++--------+---------+--------+----------+----------+------------+----------+------+
+| rollno | name    | gender | dob      | mobileno | city       | district | dept |
++--------+---------+--------+----------+----------+------------+----------+------+
+|      1 | Imran   | M      | January  |    79937 | Chennai    | Tandalam | CSE  |
+|      2 | Ameer   | M      | May      |    84679 | Benguluru  | Rk puram | MEC  |
+|      3 | Fareed  | M      | December |    76579 | Vijayawada | Krishna  | CHE  |
+|      4 | Parveen | F      | October  |    78962 | Guntur     | Guntur   | CSE  |
++--------+---------+--------+----------+----------+------------+----------+------+
+4 rows in set (0.00 sec)
+
+mysql> insert into studepartment values(234,1,"CSE");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into studepartment values(345,2,"CHE");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into studepartment values(456,3,"ECE");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into studepartment values(567,4,"IT");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from studepartment;
++-------+--------+---------+
+| depid | rollno | depname |
++-------+--------+---------+
+|   234 |      1 | CSE     |
+|   345 |      2 | CHE     |
+|   456 |      3 | ECE     |
+|   567 |      4 | IT      |
++-------+--------+---------+
+4 rows in set (0.00 sec)
+
+mysql> insert into employee values(986,78654,"Imran",3000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(765,57753,"Ameer",6000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(345,45786,"Fareed",8000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(456,75442,"Khadar",9000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from employee;
++-------+----------+---------+--------+
+| empid | mobileno | empname | salary |
++-------+----------+---------+--------+
+|   986 |    78654 | Imran   |   3000 |
+|   765 |    57753 | Ameer   |   6000 |
+|   345 |    45786 | Fareed  |   8000 |
+|   456 |    75442 | Khadar  |   9000 |
++-------+----------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> insert into empdept values(23,666,"CSE");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into empdept values(67,333,"MEC");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into empdept values(78,888,"CHE");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into empdept values(45,555,"IT");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from empdept;
++-------+-----------+-------------+
+| empid | empdeptid | empdeptname |
++-------+-----------+-------------+
+|    23 |       666 | CSE         |
+|    67 |       333 | MEC         |
+|    78 |       888 | CHE         |
+|    45 |       555 | IT          |
++-------+-----------+-------------+
+4 rows in set (0.00 sec)
