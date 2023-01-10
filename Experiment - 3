@@ -1,0 +1,49 @@
+mysql> use strome;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table menteees(Regno int(10),Name varchar(20),Dept varchar(10),Address varchar(10),Fathername varchar(20));
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> insert into menteees values(19223344,"Imran","CSE","Chennai","Chan basha");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into menteees values(19223345,"Ameer","MEC","Benguluru","Nazeer");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into menteees values(12679647,"Parveen","CSE","Guntur","Vali");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into menteees values(679456398,"Waseem","CHE","pune","Illiyaz");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select*from menteees;
++-----------+---------+------+-----------+------------+
+| Regno     | Name    | Dept | Address   | Fathername |
++-----------+---------+------+-----------+------------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |
++-----------+---------+------+-----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> select Name from menteees;
++---------+
+| Name    |
++---------+
+| Imran   |
+| Ameer   |
+| Parveen |
+| Waseem  |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> select*from menteees where Name="Imran";
++----------+-------+------+---------+------------+
+| Regno    | Name  | Dept | Address | Fathername |
++----------+-------+------+---------+------------+
+| 19223344 | Imran | CSE  | Chennai | Chan basha |
++----------+-------+------+---------+------------+
+1 row in set (0.00 sec)
