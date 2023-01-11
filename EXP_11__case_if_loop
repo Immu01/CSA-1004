@@ -1,0 +1,115 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_cool |
++----------------+
+| employee       |
+| faculty        |
+| marks_view     |
+| mdept          |
+| mentees        |
+| mentees1       |
+| per            |
+| student        |
+| studepartment  |
++----------------+
+9 rows in set (0.01 sec)
+
+mysql> select*from mentees;
++-----------+---------+------+-----------+------------+-------+---------+
+| Regno     | Name    | Dept | Address   | Fathername | Marks | subject |
++-----------+---------+------+-----------+------------+-------+---------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |    99 | MATHS   |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |    89 | Physics |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |    95 | MATHS   |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |    91 | NULL    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |    91 | DBMS    |
++-----------+---------+------+-----------+------------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT Name, Marks,CASE WHEN Marks > 95 THEN 'Excellent' WHEN Marks >90 THEN 'Good' ELSE 'average' END AS performance FROM mentees;
++---------+-------+-------------+
+| Name    | Marks | performance |
++---------+-------+-------------+
+| Imran   |    99 | Excellent   |
+| Ameer   |    89 | average     |
+| Parveen |    95 | Good        |
+| Waseem  |    91 | Good        |
+| Sadhik  |    91 | Good        |
++---------+-------+-------------+
+5 rows in set (0.00 sec)
+
+mysql> select Name,Marks,if(Marks>=95,"Excellent marks","Good marks") from mentees;
++---------+-------+----------------------------------------------+
+| Name    | Marks | if(Marks>=95,"Excellent marks","Good marks") |
++---------+-------+----------------------------------------------+
+| Imran   |    99 | Excellent marks                              |
+| Ameer   |    89 | Good marks                                   |
+| Parveen |    95 | Excellent marks                              |
+| Waseem  |    91 | Good marks                                   |
+| Sadhik  |    91 | Good marks                                   |
++---------+-------+----------------------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> DELIMITER $$
+mysql> CREATE FUNCTION REPEAT_DEMO(INC INT)
+    -> RETURNS CHAR(40)
+    -> DETERMINISTIC
+    -> BEGIN
+    -> DECLARE INCOME INT;
+    -> SET INCOME=0;
+    -> REPEAT
+    -> SET INCOME=INCOME+INC;
+    -> UNTIL INCOME>4000
+    -> END REPEAT;
+    -> RETURN "INCOME>4000 DETECTED";
+    -> END;
+    -> $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>  SELECT REPEAT_DEMO(3000);$$
++----------------------+
+| REPEAT_DEMO(3000)    |
++----------------------+
+| INCOME>4000 DETECTED |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT REPEAT_DEMO(4000);$$
++----------------------+
+| REPEAT_DEMO(4000)    |
++----------------------+
+| INCOME>4000 DETECTED |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> DELIMITER $$
+mysql> CREATE FUNCTION WHILE_DEMO(VALUE CHAR(1))
+    -> RETURNS CHAR(20)
+    -> DETERMINISTIC
+    ->  BEGIN
+    -> DECLARE STR CHAR(100);
+    -> DECLARE I INT;
+    -> SET STR='';
+    -> SET I=1;
+    -> LABEL:
+    -> WHILE I<=5 DO
+    -> SET STR =CONCAT(STR,VALUE);
+    -> SET I=I+1;
+    -> END WHILE LABEL;
+    -> RETURN STR;
+    -> END;
+    -> $$
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> SELECT WHILE_DEMO('A');$$
++-----------------+
+| WHILE_DEMO('A') |
++-----------------+
+| AAAAA           |
++-----------------+
+1 row in set (0.01 sec)
