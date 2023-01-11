@@ -1,0 +1,62 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_cool |
++----------------+
+| employee       |
+| faculty        |
+| marks_view     |
+| mdept          |
+| mentees        |
+| mentees1       |
+| movies         |
+| per            |
+| student        |
+| studepartment  |
++----------------+
+10 rows in set (0.00 sec)
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| rollno   | int         | NO   | PRI | NULL    |       |
+| name     | varchar(20) | YES  |     | NULL    |       |
+| gender   | char(1)     | YES  |     | NULL    |       |
+| dob      | varchar(10) | YES  |     | NULL    |       |
+| mobileno | int         | YES  |     | NULL    |       |
+| city     | varchar(20) | YES  |     | NULL    |       |
+| district | varchar(20) | YES  |     | NULL    |       |
+| dept     | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> create user Imran;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> grant all on student to Imran;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for Imran;
++---------------------------------------------------------+
+| Grants for Imran@%                                      |
++---------------------------------------------------------+
+| GRANT USAGE ON *.* TO `Imran`@`%`                       |
+| GRANT ALL PRIVILEGES ON `cool`.`student` TO `Imran`@`%` |
++---------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+mysql> revoke all on student from Imran;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show grants for Imran;
++-----------------------------------+
+| Grants for Imran@%                |
++-----------------------------------+
+| GRANT USAGE ON *.* TO `Imran`@`%` |
++-----------------------------------+
+1 row in set (0.00 sec)
