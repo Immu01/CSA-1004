@@ -1,0 +1,148 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table car(car_model varchar(10),car_name varchar(20),car_mileage int(20),cost int(10));
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> desc car;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| car_model   | varchar(10) | YES  |     | NULL    |       |
+| car_name    | varchar(20) | YES  |     | NULL    |       |
+| car_mileage | int         | YES  |     | NULL    |       |
+| cost        | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql> insert into car values(2004,"Ferrari",120,300000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into car values(2000,"Rolls Royce",110,9000000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into car values(2015,"Cadillac",70,7000000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into car values(2022,"mustang",130,8000000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into car values(2012,"Audi",100,7000000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  select*from car;
++-----------+-------------+-------------+---------+
+| car_model | car_name    | car_mileage | cost    |
++-----------+-------------+-------------+---------+
+| 2004      | Ferrari     |         120 |  300000 |
+| 2000      | Rolls Royce |         110 | 9000000 |
+| 2015      | Cadillac    |          70 | 7000000 |
+| 2022      | mustang     |         130 | 8000000 |
+| 2012      | Audi        |         100 | 7000000 |
++-----------+-------------+-------------+---------+
+5 rows in set (0.00 sec)
+
+mysql> create table company(c_name varchar(20),no_of_cars int(10),phone_no varchar(20));
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+mysql> insert into company values('volkswagen motors',400,79937),('Tata motors',500,84670),('BMW motors',250,79937),('Ferrari',120,84670);
+Query OK, 4 rows affected (0.01 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select*from company;
++-------------------+------------+----------+
+| c_name            | no_of_cars | phone_no |
++-------------------+------------+----------+
+| volkswagen motors |        400 | 79937    |
+| Tata motors       |        500 | 84670    |
+| BMW motors        |        250 | 79937    |
+| Ferrari           |        120 | 84670    |
++-------------------+------------+----------+
+4 rows in set (0.00 sec)
+
+mysql> delete from company where no_of_cars=120;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from company;
++-------------------+------------+----------+
+| c_name            | no_of_cars | phone_no |
++-------------------+------------+----------+
+| volkswagen motors |        400 | 79937    |
+| Tata motors       |        500 | 84670    |
+| BMW motors        |        250 | 79937    |
++-------------------+------------+----------+
+3 rows in set (0.00 sec)
+
+mysql> select*from car having car_mileage>100;
++-----------+-------------+-------------+---------+
+| car_model | car_name    | car_mileage | cost    |
++-----------+-------------+-------------+---------+
+| 2004      | Ferrari     |         120 |  300000 |
+| 2000      | Rolls Royce |         110 | 9000000 |
+| 2022      | mustang     |         130 | 8000000 |
++-----------+-------------+-------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> delete from car where car_model=2012;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from car;
++-----------+-------------+-------------+---------+
+| car_model | car_name    | car_mileage | cost    |
++-----------+-------------+-------------+---------+
+| 2004      | Ferrari     |         120 |  300000 |
+| 2000      | Rolls Royce |         110 | 9000000 |
+| 2015      | Cadillac    |          70 | 7000000 |
+| 2022      | mustang     |         130 | 8000000 |
++-----------+-------------+-------------+---------+
+4 rows in set (0.01 sec)
+
+mysql> select max(cost) from car;
++-----------+
+| max(cost) |
++-----------+
+|   9000000 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> alter table car add primary key(car_mileage);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc car;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| car_model   | varchar(10) | YES  |     | NULL    |       |
+| car_name    | varchar(20) | YES  |     | NULL    |       |
+| car_mileage | int         | NO   | PRI | NULL    |       |
+| cost        | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create view cost as select*from car where cost>100000;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select *from cost;
++-----------+-------------+-------------+---------+
+| car_model | car_name    | car_mileage | cost    |
++-----------+-------------+-------------+---------+
+| 2015      | Cadillac    |          70 | 7000000 |
+| 2000      | Rolls Royce |         110 | 9000000 |
+| 2004      | Ferrari     |         120 |  300000 |
+| 2022      | mustang     |         130 | 8000000 |
++-----------+-------------+-------------+---------+
+4 rows in set (0.00 sec)
+
+select *from car group by car_name;
++-----------+-------------+-------------+---------+
+| car_model | car_name    | car_mileage | cost    |
++-----------+-------------+-------------+---------+
+| 2015      | Cadillac    |          70 | 7000000 |
+| 2004      | Ferrari     |         120 |  300000 |
+| 2022      | mustang     |         130 | 8000000 |
+| 2000      | Rolls Royce |         110 | 9000000 |
++-----------+----------+-------------+------------+
+3 rows in set (0.01 sec)
