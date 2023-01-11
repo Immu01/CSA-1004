@@ -1,0 +1,102 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_cool |
++----------------+
+| employee       |
+| faculty        |
+| mentees        |
+| student        |
+| studepartment  |
++----------------+
+5 rows in set (0.00 sec)
+
+mysql> select* from mentees;
++-----------+---------+------+-----------+------------+
+| Regno     | Name    | Dept | Address   | Fathername |
++-----------+---------+------+-----------+------------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |
++-----------+---------+------+-----------+------------+
+5 rows in set (0.00 sec)
+
+mysql> Select *from mentees where Dept='CSE';
++----------+---------+------+---------+------------+
+| Regno    | Name    | Dept | Address | Fathername |
++----------+---------+------+---------+------------+
+| 19223344 | Imran   | CSE  | Chennai | Chan basha |
+| 12679647 | Parveen | CSE  | Guntur  | Vali       |
++----------+---------+------+---------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select *from mentees where Name="Imran";
++----------+-------+------+---------+------------+
+| Regno    | Name  | Dept | Address | Fathername |
++----------+-------+------+---------+------------+
+| 19223344 | Imran | CSE  | Chennai | Chan basha |
++----------+-------+------+---------+------------+
+1 row in set (0.00 sec)
+
+mysql> alter table mentees add Marks int(3);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> update mentees set Marks=99 where Dept="CSE";
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update mentees set Marks=91 where Dept="POLY";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update mentees set Marks=91 where Name="Waseem";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update mentees set Marks=95 where Name="Parveen";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from mentees;
++-----------+---------+------+-----------+------------+-------+
+| Regno     | Name    | Dept | Address   | Fathername | Marks |
++-----------+---------+------+-----------+------------+-------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |    99 |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |  NULL |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |    95 |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |    91 |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |    91 |
++-----------+---------+------+-----------+------------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select*from mentees where Name like 'I%';
++----------+-------+------+---------+------------+-------+
+| Regno    | Name  | Dept | Address | Fathername | Marks |
++----------+-------+------+---------+------------+-------+
+| 19223344 | Imran | CSE  | Chennai | Chan basha |    99 |
++----------+-------+------+---------+------------+-------+
+1 row in set (0.01 sec)
+
+mysql> select*from mentees where Dept like '%S%';
++----------+---------+------+---------+------------+-------+
+| Regno    | Name    | Dept | Address | Fathername | Marks |
++----------+---------+------+---------+------------+-------+
+| 19223344 | Imran   | CSE  | Chennai | Chan basha |    99 |
+| 12679647 | Parveen | CSE  | Guntur  | Vali       |    95 |
++----------+---------+------+---------+------------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select *from mentees where Address like 'C___n_i';
++----------+-------+------+---------+------------+-------+
+| Regno    | Name  | Dept | Address | Fathername | Marks |
++----------+-------+------+---------+------------+-------+
+| 19223344 | Imran | CSE  | Chennai | Chan basha |    99 |
++----------+-------+------+---------+------------+-------+
+1 row in set (0.00 sec)
