@@ -1,0 +1,102 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_cool |
++----------------+
+| employee       |
+| faculty        |
+| mentees        |
+| student        |
+| studepartment  |
++----------------+
+5 rows in set (0.00 sec)
+
+mysql> alter table mentees add subject varchar(20);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update mentees set subject="MATHS" where Dept="CSE";
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> update mentees set subject="DBMS" where Dept="POLY";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update mentees set subject="BIOEVS" where Dept="MEC";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mentees;
++-----------+---------+------+-----------+------------+-------+---------+
+| Regno     | Name    | Dept | Address   | Fathername | Marks | subject |
++-----------+---------+------+-----------+------------+-------+---------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |    99 | MATHS   |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |  NULL | BIOEVS  |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |    95 | MATHS   |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |    91 | NULL    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |    91 | DBMS    |
++-----------+---------+------+-----------+------------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select*from mentees where Marks BETWEEN 95 and 99;
++----------+---------+------+---------+------------+-------+---------+
+| Regno    | Name    | Dept | Address | Fathername | Marks | subject |
++----------+---------+------+---------+------------+-------+---------+
+| 19223344 | Imran   | CSE  | Chennai | Chan basha |    99 | MATHS   |
+| 12679647 | Parveen | CSE  | Guntur  | Vali       |    95 | MATHS   |
++----------+---------+------+---------+------------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select*from mentees where subject IN('BIOEVS');
++----------+-------+------+-----------+------------+-------+---------+
+| Regno    | Name  | Dept | Address   | Fathername | Marks | subject |
++----------+-------+------+-----------+------------+-------+---------+
+| 19223345 | Ameer | MEC  | Benguluru | Nazeer     |  NULL | BIOEVS  |
++----------+-------+------+-----------+------------+-------+---------+
+1 row in set (0.00 sec)
+
+mysql> select*from mentees where Marks NOT BETWEEN 95 and 99;
++-----------+--------+------+-----------+------------+-------+---------+
+| Regno     | Name   | Dept | Address   | Fathername | Marks | subject |
++-----------+--------+------+-----------+------------+-------+---------+
+| 679456398 | Waseem | CHE  | pune      | Illiyaz    |    91 | NULL    |
+| 672456398 | Sadhik | POLY | Jhamkandi | Basha      |    91 | DBMS    |
++-----------+--------+------+-----------+------------+-------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(Marks) from mentees where Dept="CSE";
++------------+
+| sum(Marks) |
++------------+
+|        194 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select avg(Marks) as Average from mentees;
++---------+
+| Average |
++---------+
+| 94.0000 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select min(Marks) as minimum from mentees;
++---------+
+| minimum |
++---------+
+|      91 |
++---------+
+1 row in set (0.01 sec)
+
+mysql> select max(Marks) as maximum from mentees;
++---------+
+| maximum |
++---------+
+|      99 |
++---------+
+1 row in set (0.00 sec)
