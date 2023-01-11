@@ -1,0 +1,113 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select*from mentees;
++-----------+---------+------+-----------+------------+-------+---------+
+| Regno     | Name    | Dept | Address   | Fathername | Marks | subject |
++-----------+---------+------+-----------+------------+-------+---------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |    99 | MATHS   |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |    89 | Physics |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |    95 | MATHS   |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |    91 | NULL    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |    91 | DBMS    |
++-----------+---------+------+-----------+------------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> create table mdept(Deptid int(5),Deptname varchar(20),Rollno int(10));
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> insert into mdept values(1,"CSE",123456757);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into mdept values(2,"ECE",192013469);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into mdept values(2,"ECE",193458970);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> update mdept set Deptid=3 where Rollno=123456757;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mdept;
++--------+----------+-----------+
+| Deptid | Deptname | Rollno    |
++--------+----------+-----------+
+|      3 | CSE      |  19223344 |
+|      2 | ECE      |  19223345 |
+|      2 | BME      | 193458970 |
++--------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> update mdept set Deptname="BME" where Rollno=193458970;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mdept;
++--------+----------+-----------+
+| Deptid | Deptname | Rollno    |
++--------+----------+-----------+
+|      3 | CSE      | 123456757 |
+|      2 | ECE      | 192013469 |
+|      2 | BME      | 193458970 |
++--------+----------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select Deptid,Deptname from mdept,mentees where mentees.Regno=mdept.Rollno;
++--------+----------+
+| Deptid | Deptname |
++--------+----------+
+|      3 | CSE      |
+|      2 | ECE      |
++--------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select Deptid,Deptname,Rollno from mdept,mentees where mentees.Regno=mdept.Rollno;
++--------+----------+----------+
+| Deptid | Deptname | Rollno   |
++--------+----------+----------+
+|      3 | CSE      | 19223344 |
+|      2 | ECE      | 19223345 |
++--------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select Name, Deptid,Deptname,Rollno from mdept m,mentees m1 where m1.Regno=m.Rollno;
++-------+--------+----------+----------+
+| Name  | Deptid | Deptname | Rollno   |
++-------+--------+----------+----------+
+| Imran |      3 | CSE      | 19223344 |
+| Ameer |      2 | ECE      | 19223345 |
++-------+--------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select Name,Dept, Deptid,Deptname,Rollno from mdept,mentees where mentees.Regno=mdept.Rollno; 
++-------+------+--------+----------+----------+
+| Name  | Dept | Deptid | Deptname | Rollno   |
++-------+------+--------+----------+----------+
+| Imran | CSE  |      3 | CSE      | 19223344 |
+| Ameer | MEC  |      2 | ECE      | 19223345 |
++-------+------+--------+----------+----------+
+2 rows in set (0.00 sec)
+
+mysql> select Rollno,Deptname,Name,Address from mdept left outer join mentees on mdept.Rollno=mentees.Regno;
++-----------+----------+-------+-----------+
+| Rollno    | Deptname | Name  | Address   |
++-----------+----------+-------+-----------+
+|  19223344 | CSE      | Imran | Chennai   |
+|  19223345 | ECE      | Ameer | Benguluru |
+| 193458970 | BME      | NULL  | NULL      |
++-----------+----------+-------+-----------+
+3 rows in set (0.01 sec)
+mysql> select Rollno,Deptname,Name,Address from mdept right outer join mentees on mdept.Rollno=mentees.Regno;
++----------+----------+---------+-----------+
+| Rollno   | Deptname | Name    | Address   |
++----------+----------+---------+-----------+
+| 19223344 | CSE      | Imran   | Chennai   |
+| 19223345 | ECE      | Ameer   | Benguluru |
+|     NULL | NULL     | Parveen | Guntur    |
+|     NULL | NULL     | Waseem  | pune      |
+|     NULL | NULL     | Sadhik  | Jhamkandi |
++----------+----------+---------+-----------+
+5 rows in set (0.00 sec)
