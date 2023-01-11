@@ -1,0 +1,252 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table Student1(Reg_no int(4),Name varchar(30),DBMS int(3),Maths int(3),Java int(3),Os int(3),Grade char(1),Result varchar(5));
+Query OK, 0 rows affected, 5 warnings (0.01 sec)
+
+mysql> desc Student1;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Reg_no | int         | YES  |     | NULL    |       |
+| Name   | varchar(30) | YES  |     | NULL    |       |
+| DBMS   | int         | YES  |     | NULL    |       |
+| Maths  | int         | YES  |     | NULL    |       |
+| Java   | int         | YES  |     | NULL    |       |
+| Os     | int         | YES  |     | NULL    |       |
+| Grade  | char(1)     | YES  |     | NULL    |       |
+| Result | varchar(5)  | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table Student1 add primary key(Reg_no);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc Student1;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Reg_no | int         | NO   | PRI | NULL    |       |
+| Name   | varchar(30) | YES  |     | NULL    |       |
+| DBMS   | int         | YES  |     | NULL    |       |
+| Maths  | int         | YES  |     | NULL    |       |
+| Java   | int         | YES  |     | NULL    |       |
+| Os     | int         | YES  |     | NULL    |       |
+| Grade  | char(1)     | YES  |     | NULL    |       |
+| Result | varchar(5)  | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+8 rows in set (0.01 sec)
+
+mysql> insert into Student1 values(111,"Imran",96,94,99,98,"S","Pass");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Student1 values(222,"Ameer",89,90,84,96,"A","Pass");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Student1 values(333,"Khadar",96,86,88,61,"B","Pass");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Student1 values(444,"Parveen",99,88,76,60,"c","Pass");                          
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from Student1;
++--------+---------+------+-------+------+------+-------+--------+
+| Reg_no | Name    | DBMS | Maths | Java | Os   | Grade | Result |
++--------+---------+------+-------+------+------+-------+--------+
+|    111 | Imran   |   96 |    94 |   99 |   98 | S     | Pass   |
+|    222 | Ameer   |   89 |    90 |   84 |   96 | A     | Pass   |
+|    333 | Khadar  |   96 |    86 |   88 |   61 | B     | Pass   |
+|    444 | Parveen |   99 |    88 |   76 |   60 | c     | Pass   |
++--------+---------+------+-------+------+------+-------+--------+
+4 rows in set (0.00 sec)
+
+mysql> insert into Student1 values(555,"Sameer",20,34,40,45,"F","Fail"),(666,"Zubear",79,90,76,67,"D","Pass");
+Query OK, 2 rows affected (0.00 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+mysql> select*from Student1;
++--------+---------+------+-------+------+------+-------+--------+
+| Reg_no | Name    | DBMS | Maths | Java | Os   | Grade | Result |
++--------+---------+------+-------+------+------+-------+--------+
+|    111 | Imran   |   96 |    94 |   99 |   98 | S     | Pass   |
+|    222 | Ameer   |   89 |    90 |   84 |   96 | A     | Pass   |
+|    333 | Khadar  |   96 |    86 |   88 |   61 | B     | Pass   |
+|    444 | Parveen |   99 |    88 |   76 |   60 | c     | Pass   |
+|    555 | Sameer  |   20 |    34 |   40 |   45 | F     | Fail   |
+|    666 | Zubear  |   79 |    90 |   76 |   67 | D     | Pass   |
++--------+---------+------+-------+------+------+-------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select Reg_no,Grade,
+    -> case
+    -> when Grade="S" then "Distinction"
+    -> when Grade="A" then "Excellent"
+    -> when Grade="B" then "Very Good"
+    -> when Grade="C" or Grade="D" then "Average"
+    -> else"Poor"
+    -> end as Performance
+    -> from Student1;
++--------+-------+-------------+
+| Reg_no | Grade | Performance |
++--------+-------+-------------+
+|    111 | S     | Distinction |
+|    222 | A     | Excellent   |
+|    333 | B     | Very Good   |
+|    444 | c     | Average     |
+|    555 | F     | Poor        |
+|    666 | D     | Average     |
++--------+-------+-------------+
+6 rows in set (0.00 sec)
+
+mysql> select avg(OS) as sum_of_OS from Student1;
++-----------+
+| sum_of_OS |
++-----------+
+|   71.1667 |
++-----------+
+1 row in set (0.00 sec)
+
+ysql> select sum(DBMS) as sum_of_DBMS from Student1;
++-------------+
+| sum_of_DBMS |
++-------------+
+|         479 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(DBMS) as avg_of_DBMS from Student1;
++-------------+
+| avg_of_DBMS |
++-------------+
+|     79.8333 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(Maths) as sum_of_Maths from Student1;
++--------------+
+| sum_of_Maths |
++--------------+
+|      80.3333 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(Maths) as avg_of_Maths from Student1;
++--------------+
+| avg_of_Maths |
++--------------+
+|      80.3333 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> select sum(Java) as sum_of_Java from Student1;
++-------------+
+| sum_of_Java |
++-------------+
+|         463 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(Java) as avg_of_Java from Student1;
++-------------+
+| avg_of_Java |
++-------------+
+|     77.1667 |
++-------------+
+1 row in set (0.01 sec)
+
+ysql> select Name,Reg_no,DBMS from Student1 where DBMS>=95;
++---------+--------+------+
+| Name    | Reg_no | DBMS |
++---------+--------+------+
+| Imran   |    111 |   96 |
+| Khadar  |    333 |   96 |
+| Parveen |    444 |   99 |
++---------+--------+------+
+3 rows in set (0.00 sec)
+
+mysql> create view Grades as select*from Student1 where OS>90;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select*from Grades;
++--------+-------+------+-------+------+------+-------+--------+
+| Reg_no | Name  | DBMS | Maths | Java | Os   | Grade | Result |
++--------+-------+------+-------+------+------+-------+--------+
+|    111 | Imran |   96 |    94 |   99 |   98 | S     | Pass   |
+|    222 | Ameer |   89 |    90 |   84 |   96 | A     | Pass   |
++--------+-------+------+-------+------+------+-------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select *from Student1 order by Name;
++--------+---------+------+-------+------+------+-------+--------+
+| Reg_no | Name    | DBMS | Maths | Java | Os   | Grade | Result |
++--------+---------+------+-------+------+------+-------+--------+
+|    222 | Ameer   |   89 |    90 |   84 |   96 | A     | Pass   |
+|    111 | Imran   |   96 |    94 |   99 |   98 | S     | Pass   |
+|    333 | Khadar  |   96 |    86 |   88 |   61 | B     | Pass   |
+|    444 | Parveen |   99 |    88 |   76 |   60 | c     | Pass   |
+|    555 | Sameer  |   20 |    34 |   40 |   45 | F     | Fail   |
+|    666 | Zubear  |   79 |    90 |   76 |   67 | D     | Pass   |
++--------+---------+------+-------+------+------+-------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select *from Student1 order by Grade;
++--------+---------+------+-------+------+------+-------+--------+
+| Reg_no | Name    | DBMS | Maths | Java | Os   | Grade | Result |
++--------+---------+------+-------+------+------+-------+--------+
+|    222 | Ameer   |   89 |    90 |   84 |   96 | A     | Pass   |
+|    333 | Khadar  |   96 |    86 |   88 |   61 | B     | Pass   |
+|    444 | Parveen |   99 |    88 |   76 |   60 | c     | Pass   |
+|    666 | Zubear  |   79 |    90 |   76 |   67 | D     | Pass   |
+|    555 | Sameer  |   20 |    34 |   40 |   45 | F     | Fail   |
+|    111 | Imran   |   96 |    94 |   99 |   98 | S     | Pass   |
++--------+---------+------+-------+------+------+-------+--------+
+6 rows in set (0.00 sec)
+
+mysql> select *from Student1 Where Result="Pass";
++--------+---------+------+-------+------+------+-------+--------+
+| Reg_no | Name    | DBMS | Maths | Java | Os   | Grade | Result |
++--------+---------+------+-------+------+------+-------+--------+
+|    111 | Imran   |   96 |    94 |   99 |   98 | S     | Pass   |
+|    222 | Ameer   |   89 |    90 |   84 |   96 | A     | Pass   |
+|    333 | Khadar  |   96 |    86 |   88 |   61 | B     | Pass   |
+|    444 | Parveen |   99 |    88 |   76 |   60 | c     | Pass   |
+|    666 | Zubear  |   79 |    90 |   76 |   67 | D     | Pass   |
++--------+---------+------+-------+------+------+-------+--------+
+5 rows in set (0.00 sec)
+
+mysql> select *from Student1 Where Result="Fail";
++--------+--------+------+-------+------+------+-------+--------+
+| Reg_no | Name   | DBMS | Maths | Java | Os   | Grade | Result |
++--------+--------+------+-------+------+------+-------+--------+
+|    555 | Sameer |   20 |    34 |   40 |   45 | F     | Fail   |
++--------+--------+------+-------+------+------+-------+--------+
+1 row in set (0.00 sec)
+
+mysql> select Reg_no,Name,DBMS from Student1 order by DBMS DESC;
++--------+---------+------+
+| Reg_no | Name    | DBMS |
++--------+---------+------+
+|    444 | Parveen |   99 |
+|    111 | Imran   |   96 |
+|    333 | Khadar  |   96 |
+|    222 | Ameer   |   89 |
+|    666 | Zubear  |   79 |
+|    555 | Sameer  |   20 |
++--------+---------+------+
+6 rows in set (0.00 sec)
+
+mysql> select Reg_no,Name,DBMS from Student1 order by DBMS ASC;
++--------+---------+------+
+| Reg_no | Name    | DBMS |
++--------+---------+------+
+|    555 | Sameer  |   20 |
+|    666 | Zubear  |   79 |
+|    222 | Ameer   |   89 |
+|    111 | Imran   |   96 |
+|    333 | Khadar  |   96 |
+|    444 | Parveen |   99 |
++--------+---------+------+
+6 rows in set (0.00 sec)
