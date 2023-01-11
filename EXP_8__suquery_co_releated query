@@ -1,0 +1,54 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_cool |
++----------------+
+| employee       |
+| faculty        |
+| mentees        |
+| student        |
+| studepartment  |
++----------------+
+5 rows in set (0.00 sec)
+
+mysql> select*from mentees;
++-----------+---------+------+-----------+------------+-------+---------+
+| Regno     | Name    | Dept | Address   | Fathername | Marks | subject |
++-----------+---------+------+-----------+------------+-------+---------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |    99 | MATHS   |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |    89 | Physics |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |    95 | MATHS   |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |    91 | NULL    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |    91 | DBMS    |
++-----------+---------+------+-----------+------------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select Regno,Name from mentees where Name IN(select Name from mentees where Dept="CSE");
++----------+---------+
+| Regno    | Name    |
++----------+---------+
+| 19223344 | Imran   |
+| 12679647 | Parveen |
++----------+---------+
+2 rows in set (0.00 sec)
+
+mysql> create table mentees1(Id int(10),Name varchar(20));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> insert into mentees1(Id,Name)
+    -> select Regno,Name
+    -> from mentees where Dept="ECE";
+Query OK, 0 rows affected (0.00 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select Regno,(select Name from mentees where Regno=19223344)as Name,Dept,Address,Fathername,Marks,subject from mentees where Regno=19223344;
++----------+-------+------+---------+------------+-------+---------+
+| Regno    | Name  | Dept | Address | Fathername | Marks | subject |
++----------+-------+------+---------+------------+-------+---------+
+| 19223344 | Imran | CSE  | Chennai | Chan basha |    99 | MATHS   |
++----------+-------+------+---------+------------+-------+---------+
+1 row in set (0.00 sec)
