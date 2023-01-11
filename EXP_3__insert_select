@@ -1,0 +1,59 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table mentees(Regno int(10),Name varchar(20),Dept varchar(10),Address varchar(10),Fathername varchar(20));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> insert into mentees values(19223344,"Imran","CSE","Chennai","Chan basha");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into mentees values(19223345,"Ameer","MEC","Benguluru","Nazeer");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into mentees values(12679647,"Parveen","CSE","Guntur","Vali");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into mentees values(679456398,"Waseem","CHE","pune","Illiyaz");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into mentees values(672456398,"Sadhik","POLY","Jhamkandi","Basha");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into mentees values(672452398,"Sameer","EEE","Gujarath","salam");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from mentees;
++-----------+---------+------+-----------+------------+
+| Regno     | Name    | Dept | Address   | Fathername |
++-----------+---------+------+-----------+------------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |
+| 672452398 | Sameer  | EEE  | Gujarath  | salam      |
++-----------+---------+------+-----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select Name from mentees;
++---------+
+| Name    |
++---------+
+| Imran   |
+| Ameer   |
+| Parveen |
+| Waseem  |
+| Sadhik  |
+| Sameer  |
++---------+
+6 rows in set (0.00 sec)
+
+mysql> select*from mentees where Name="Imran";
++----------+-------+------+---------+------------+
+| Regno    | Name  | Dept | Address | Fathername |
++----------+-------+------+---------+------------+
+| 19223344 | Imran | CSE  | Chennai | Chan basha |
++----------+-------+------+---------+------------+
+1 row in set (0.00 sec)
