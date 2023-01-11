@@ -1,0 +1,106 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table marks(Regno int(3),Name varchar(25), Marks int(3));
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> insert into marks values(12,"Imran",89);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into marks values(14,"Parveen",99);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into marks values(16,"Fareed",97);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into marks values(18,"Ameer",88);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into marks values(20,"Jani",99);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into marks values(22,"Zubear",88);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from marks;
++-------+---------+-------+
+| Regno | Name    | Marks |
++-------+---------+-------+
+|    12 | Imran   |    89 |
+|    14 | Parveen |    99 |
+|    16 | Fareed  |    97 |
+|    18 | Ameer   |    88 |
+|    20 | Jani    |    99 |
+|    22 | Zubear  |    88 |
++-------+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select @@autocommit;
++--------------+
+| @@autocommit |
++--------------+
+|            1 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> insert into marks values(10,"Ayesha",78);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from marks;
++-------+---------+-------+
+| Regno | Name    | Marks |
++-------+---------+-------+
+|    12 | Imran   |    89 |
+|    14 | Parveen |    99 |
+|    16 | Fareed  |    97 |
+|    18 | Ameer   |    88 |
+|    20 | Jani    |    99 |
+|    22 | Zubear  |    88 |
+|    10 | Ayesha  |    78 |
++-------+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> set autocommit=0;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select @@autocommit;
++--------------+
+| @@autocommit |
++--------------+
+|            0 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> delete from marks where Marks=88;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> select*from marks;
++-------+---------+-------+
+| Regno | Name    | Marks |
++-------+---------+-------+
+|    12 | Imran   |    89 |
+|    14 | Parveen |    99 |
+|    16 | Fareed  |    97 |
+|    20 | Jani    |    99 |
+|    10 | Ayesha  |    78 |
++-------+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select*from marks;
++-------+---------+-------+
+| Regno | Name    | Marks |
++-------+---------+-------+
+|    12 | Imran   |    89 |
+|    14 | Parveen |    99 |
+|    16 | Fareed  |    97 |
+|    18 | Ameer   |    88 |
+|    20 | Jani    |    99 |
+|    22 | Zubear  |    88 |
+|    10 | Ayesha  |    78 |
++-------+---------+-------+
+7 rows in set (0.00 sec)
