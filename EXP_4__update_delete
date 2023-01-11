@@ -1,0 +1,66 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select*from mentees;
++-----------+---------+------+-----------+------------+
+| Regno     | Name    | Dept | Address   | Fathername |
++-----------+---------+------+-----------+------------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |
+| 672452398 | Sameer  | EEE  | Gujarath  | salam      |
++-----------+---------+------+-----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> update mentees set Dept="CSE" where Regno=672452398;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from mentees;
++-----------+---------+------+-----------+------------+
+| Regno     | Name    | Dept | Address   | Fathername |
++-----------+---------+------+-----------+------------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |
+| 672452398 | Sameer  | CSE  | Gujarath  | salam      |
++-----------+---------+------+-----------+------------+
+6 rows in set (0.01 sec)
+
+mysql> update mentees set Address="Goa" where Fathername="Illyaz";
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select*from mentees;
++-----------+---------+------+-----------+------------+
+| Regno     | Name    | Dept | Address   | Fathername |
++-----------+---------+------+-----------+------------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |
+| 672452398 | Sameer  | CSE  | Gujarath  | salam      |
++-----------+---------+------+-----------+------------+
+6 rows in set (0.00 sec)
+
+mysql> delete from mentees where Fathername="salam";
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from mentees;
++-----------+---------+------+-----------+------------+
+| Regno     | Name    | Dept | Address   | Fathername |
++-----------+---------+------+-----------+------------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |
++-----------+---------+------+-----------+------------+
+5 rows in set (0.00 sec)
