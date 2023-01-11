@@ -1,0 +1,105 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> create table movies(Sno int(3),Moviename varchar(30),Type varchar(15));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> insert into movies values(1,"war","action");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into movies values(2,"hit two","crime thriller");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into movies values(3,"friends","comedy");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into movies values(4,"brahmastra","astra");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into movies values(5,"Oke Oka Jeevitham","mother love");
+Query OK, 1 row affected (0.00 sec)
+mysql> select*from movies;
++------+-------------------+----------------+
+| Sno  | Moviename         | Type           |
++------+-------------------+----------------+
+|    1 | war               | action         |
+|    2 | hit two           | crime thriller |
+|    3 | friends           | comedy         |
+|    4 | brahmastra        | astra          |
+|    5 | Oke Oka Jeevitham | mother love    |
++------+-------------------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> savepoint ini;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> update movies set Moviename="half brothers" where Sno=3;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>  select*from movies;
++------+-------------------+----------------+
+| Sno  | Moviename         | Type           |
++------+-------------------+----------------+
+|    1 | war               | action         |
+|    2 | hit two           | crime thriller |
+|    3 | half brothers     | comedy         |
+|    4 | brahmastra        | astra          |
+|    5 | Oke Oka Jeevitham | mother love    |
++------+-------------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> savepoint upd;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> delete from movies where Sno=5;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from movies;
++------+---------------+----------------+
+| Sno  | Moviename     | Type           |
++------+---------------+----------------+
+|    1 | war           | action         |
+|    2 | hit two       | crime thriller |
+|    3 | half brothers | comedy         |
+|    4 | brahmastra    | astra          |
++------+---------------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> savepoint del;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> rollback to upd;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select*from movies;
++------+-------------------+----------------+
+| Sno  | Moviename         | Type           |
++------+-------------------+----------------+
+|    1 | war               | action         |
+|    2 | hit two           | crime thriller |
+|    3 | half brothers     | comedy         |
+|    4 | brahmastra        | astra          |
+|    5 | Oke Oka Jeevitham | mother love    |
++------+-------------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> rollback to ini;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select *from movies;
++------+-------------------+----------------+
+| Sno  | Moviename         | Type           |
++------+-------------------+----------------+
+|    1 | war               | action         |
+|    2 | hit two           | crime thriller |
+|    3 | friends           | comedy         |
+|    4 | brahmastra        | astra          |
+|    5 | Oke Oka Jeevitham | mother love    |
++------+-------------------+----------------+
+5 rows in set (0.01 sec)
