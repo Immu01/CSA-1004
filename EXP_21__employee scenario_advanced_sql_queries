@@ -1,0 +1,70 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select*from Employee1;
++--------+----------+------------+------------+--------+-----------+------------+
+| Emp_id | Emp_name | DOB        | DOJ        | Salary | Address   | Experience |
++--------+----------+------------+------------+--------+-----------+------------+
+|    234 | Ameer    | 1994-05-24 | 2015-06-11 | 850000 | Benguluru |          3 |
+|    345 | Parveen  | 1998-09-18 | 2017-01-22 | 200000 | Hydrabad  |          2 |
+|    456 | sadhik   | 1996-05-18 | 2018-09-23 | 990000 | Jhamkandi |          5 |
+|    567 | Fareed   | 1995-01-14 | 2011-05-21 | 780000 | Mysore    |          1 |
+|    678 | Khadhar  | 1994-07-12 | 2021-11-23 | 987000 | Goa       |          3 |
++--------+----------+------------+------------+--------+-----------+------------+
+5 rows in set (0.01 sec)
+
+mysql> select*from edept;
++---------+---------------+---------------+
+| Dept_id | Dept_name     | No_of_Persons |
++---------+---------------+---------------+
+|       1 | Sales         |            30 |
+|       2 | HR            |            10 |
+|       3 | Manufacturing |            40 |
+|       4 | Accounts      |            20 |
++---------+---------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select Emp_name,DOB from Employee1 where DOB>='1994/05/24';
++----------+------------+
+| Emp_name | DOB        |
++----------+------------+
+| Ameer    | 1994-05-24 |
+| Parveen  | 1998-09-18 |
+| sadhik   | 1996-05-18 |
+| Fareed   | 1995-01-14 |
+| Khadhar  | 1994-07-12 |
++----------+------------+
+5 rows in set, 1 warning (0.02 sec)
+
+mysql> select  e.Emp_name,e.DOB,d.Dept_no,d.Dept_name from Employee1 e inner join edept d on e.Dept_no=d.Dept_no;
++----------+------------+---------+---------------+
+| Emp_name | DOB        | Dept_no | Dept_name     |
++----------+------------+---------+---------------+
+| Ameer    | 1994-05-24 |       1 | Sales         |
+| Parveen  | 1998-09-18 |       2 | HR            |
+| Sadhik   | 1996-05-18 |       3 | Manufacturing |
+| Fareed   | 1995-01-14 |       3 | Manufacturing |
+| Khadar   | 1994-07-12 |       4 | Accounts      |
++----------+------------+---------+---------------+
+5 rows in set (0.01 sec)
+mysql> select Emp_name,Emp_id from Employee1 where Dept_no=3;
++----------+--------+
+| Emp_name | Emp_id |
++----------+--------+
+| Fareed   |    100 |
+| Sadhik   |    102 |
++----------+--------+
+2 rows in set (0.01 sec)
+mysql> select  e.Emp_name,d.Dept_no,d.Dept_name from Employee1 e inner join edept d on e.Dept_no=d.Dept_no;
++----------+---------+---------------+
+| Emp_name | Dept_no | Dept_name     |
++----------+---------+---------------+
+| Ameer    |       1 | Sales         |
+| Parveen  |       2 | HR            |
+| Sadhik   |       3 | Manufacturing |
+| Fareed   |       3 | Manufacturing |
+| Khadar   |       4 | Accounts      |
++----------+---------+---------------+
+5 rows in set (0.01 sec)
