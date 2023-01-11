@@ -1,0 +1,40 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> select*from mentees;
++-----------+---------+------+-----------+------------+-------+---------+
+| Regno     | Name    | Dept | Address   | Fathername | Marks | subject |
++-----------+---------+------+-----------+------------+-------+---------+
+|  19223344 | Imran   | CSE  | Chennai   | Chan basha |    99 | MATHS   |
+|  19223345 | Ameer   | MEC  | Benguluru | Nazeer     |    89 | Physics |
+|  12679647 | Parveen | CSE  | Guntur    | Vali       |    95 | MATHS   |
+| 679456398 | Waseem  | CHE  | pune      | Illiyaz    |    91 | NULL    |
+| 672456398 | Sadhik  | POLY | Jhamkandi | Basha      |    91 | DBMS    |
++-----------+---------+------+-----------+------------+-------+---------+
+5 rows in set (0.00 sec)
+
+mysql> select repeat(Name,2) from mentees;
++----------------+
+| repeat(Name,2) |
++----------------+
+| ImranImran     |
+| AmeerAmeer     |
+| ParveenParveen |
+| WaseemWaseem   |
+| SadhikSadhik   |
++----------------+
+5 rows in set (0.00 sec)
+
+mysql> select repeat(Dept,2) from mentees;
++----------------+
+| repeat(Dept,2) |
++----------------+
+| CSECSE         |
+| MECMEC         |
+| CSECSE         |
+| CHECHE         |
+| POLYPOLY       |
++----------------+
+5 rows in set (0.00 sec)
