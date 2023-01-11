@@ -1,0 +1,138 @@
+mysql> use cool;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+mysql> show tables;
++----------------+
+| Tables_in_cool |
++----------------+
+| Edept          |
+| employee       |
+| Employee1      |
+| faculty        |
+| marks          |
+| marks_view     |
+| mdept          |
+| mentees        |
+| mentees1       |
+| movies         |
+| per            |
+| student        |
+| studepartment  |
++----------------+
+13 rows in set (0.00 sec)
+
+mysql> create table book_company(Book_no int(5),Book_name varchar(30),Author_name varchar(30),Cost int(4),Edition int(2));
+Query OK, 0 rows affected, 3 warnings (0.01 sec)
+
+mysql> insert into book_company values(123,"Python","Imran",234,3);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into book_company values(345,"c++","Fareed",456,5);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into book_company values(567,"c+","Ameer",678,7);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into book_company values(789,"Java script","Zakeer",890,9);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from book_company;
++---------+-------------+-------------+------+---------+
+| Book_no | Book_name   | Author_name | Cost | Edition |
++---------+-------------+-------------+------+---------+
+|     123 | Python      | Imran       |  234 |       3 |
+|     345 | c++         | Fareed      |  456 |       5 |
+|     567 | c+          | Ameer       |  678 |       7 |
+|     789 | Java script | Zakeer      |  890 |       9 |
++---------+-------------+-------------+------+---------+
+4 rows in set (0.00 sec)
+
+mysql> update book_company set Author_name="Shaida" where Book_no=123;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from book_company;
++---------+-------------+-------------+------+---------+
+| Book_no | Book_name   | Author_name | Cost | Edition |
++---------+-------------+-------------+------+---------+
+|     123 | Python      | Shaida      |  234 |       3 |
+|     345 | c++         | Fareed      |  456 |       5 |
+|     567 | c+          | Ameer       |  678 |       7 |
+|     789 | Java script | Zakeer      |  890 |       9 |
++---------+-------------+-------------+------+---------+
+4 rows in set (0.00 sec)
+
+mysql> create table Authors(Author_id int(4),Author_name varchar(30),Research_area varchar(30));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> insert into Authors values(111,"Imran","Bioevs");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Authors values(222,"Ammer","Alkaline");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Authors values(333,"Khadar","Velocity");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Authors values(444,"Parveen","Optics");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select*from Authors;
++-----------+-------------+---------------+
+| Author_id | Author_name | Research_area |
++-----------+-------------+---------------+
+|       111 | Imran       | Bioevs        |
+|       222 | Ammer       | Alkaline      |
+|       333 | Khadar      | Velocity      |
+|       444 | Parveen     | Optics        |
++-----------+-------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> select Author_name from book_company where Book_name="Python";
++-------------+
+| Author_name |
++-------------+
+| Shaida      |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select Edition from book_company where Book_name="C++";
++---------+
+| Edition |
++---------+
+|       5 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> alter table book_company add Published_Year int(10);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> update book_company set Published_Year=2001 where Book_no=345;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update book_company set Published_Year=1999 where Book_no=123;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update book_company set Published_Year=1990 where Book_no=789;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update book_company set Published_Year=2005 where Book_no=567;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from book_company;
++---------+-------------+-------------+------+---------+----------------+
+| Book_no | Book_name   | Author_name | Cost | Edition | Published_Year |
++---------+-------------+-------------+------+---------+----------------+
+|     123 | Python      | Shaida      |  234 |       3 |           1999 |
+|     345 | c++         | Fareed      |  456 |       5 |           2001 |
+|     567 | c+          | Ameer       |  678 |       7 |           2005 |
+|     789 | Java script | Zakeer      |  890 |       9 |           1990 |
++---------+-------------+-------------+------+---------+----------------+
+4 rows in set (0.00 sec)
